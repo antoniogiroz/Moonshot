@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct MissionsList: View {
-    let astronauts: [String: Astronaut]
     let missions: [Mission]
     
     var body: some View {
         List(missions) { mission in
-            NavigationLink {
-                MissionView(mission: mission, astronauts: astronauts)
-            } label : {
+            NavigationLink(value: mission) {
                 HStack(spacing: 16) {
                     Image(mission.imageName)
                         .resizable()
@@ -40,6 +37,6 @@ struct MissionsList: View {
 }
 
 #Preview {
-    MissionsList(astronauts: Bundle.main.decode("astronauts.json"), missions: Bundle.main.decode("missions.json"))
+    MissionsList(missions: Bundle.main.decode("missions.json"))
         .preferredColorScheme(.dark)
 }

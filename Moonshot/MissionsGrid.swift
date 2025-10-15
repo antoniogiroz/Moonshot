@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MissionsGrid: View {
-    let astronauts: [String: Astronaut]
     let missions: [Mission]
     
     let columns = [ GridItem(.adaptive(minimum: 150)) ]
@@ -17,9 +16,7 @@ struct MissionsGrid: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 26) {
                 ForEach(missions) { mission in
-                    NavigationLink {
-                        MissionView(mission: mission, astronauts: astronauts)
-                    } label : {
+                    NavigationLink(value: mission) {
                         VStack {
                             Image(mission.imageName)
                                 .resizable()
@@ -53,6 +50,6 @@ struct MissionsGrid: View {
 }
 
 #Preview {
-    MissionsGrid(astronauts: Bundle.main.decode("astronauts.json"), missions: Bundle.main.decode("missions.json"))
+    MissionsGrid(missions: Bundle.main.decode("missions.json"))
         .preferredColorScheme(.dark)
 }

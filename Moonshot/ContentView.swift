@@ -17,9 +17,9 @@ struct ContentView: View {
         NavigationStack {
             Group {
                 if showAsGrid {
-                    MissionsGrid(astronauts: astronauts, missions: missions)
+                    MissionsGrid(missions: missions)
                 } else {
-                    MissionsList(astronauts: astronauts, missions: missions)
+                    MissionsList(missions: missions)
                 }
             }
             .navigationTitle("Moonshot")
@@ -34,6 +34,9 @@ struct ContentView: View {
                         showAsGrid.toggle()
                     }
                 }
+            }
+            .navigationDestination(for: Mission.self) { mission in
+                MissionView(mission: mission, astronauts: astronauts)
             }
         }
     }
